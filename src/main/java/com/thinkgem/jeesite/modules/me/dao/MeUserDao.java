@@ -7,6 +7,8 @@ import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
 import com.thinkgem.jeesite.modules.me.entity.MeUser;
 
+import java.util.List;
+
 /**
  * user信息DAO接口
  * @author fudiandong
@@ -14,5 +16,5 @@ import com.thinkgem.jeesite.modules.me.entity.MeUser;
  */
 @MyBatisDao
 public interface MeUserDao extends CrudDao<MeUser> {
-	
+//    List<MeUser> findList(MeUser meUser);
 }

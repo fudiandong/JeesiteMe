@@ -6,6 +6,7 @@ package com.thinkgem.jeesite.modules.me.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.modules.sys.entity.AppResult;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -21,6 +23,8 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.me.entity.MeUser;
 import com.thinkgem.jeesite.modules.me.service.MeUserService;
+
+import java.util.Map;
 
 /**
  * user信息Controller
@@ -79,5 +83,24 @@ public class MeUserController extends BaseController {
 		addMessage(redirectAttributes, "删除用户成功");
 		return "redirect:"+Global.getAdminPath()+"/me/meUser/?repage";
 	}
+
+	@RequiresPermissions("me:meUser:view")
+	@ResponseBody
+	@RequestMapping(value = "app_myList")
+	public Map<String, Object> app_myList(MeUser meUser,
+										  HttpServletRequest request, HttpServletResponse response,
+										  Model model) {
+		Map<String, Object> r = null;
+		try {
+			r = AppResult.appSuccessResult(meUserService.app_myList(
+					new Page<MeUser>(request, response), meUser));
+			AppResult.setPageInfo(r, meUser.getPage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			r = AppResult.appErrorResult("-1", "获取用户列表失败");
+		}
+		return r;
+	}
+
 
 }

@@ -5,6 +5,7 @@ package com.thinkgem.jeesite.modules.me.service;
 
 import java.util.List;
 
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +43,13 @@ public class MeUserService extends CrudService<MeUserDao, MeUser> {
 	@Transactional(readOnly = false)
 	public void delete(MeUser meUser) {
 		super.delete(meUser);
+	}
+
+	public List<MeUser> app_myList(Page<MeUser> page, MeUser meUser) {
+		meUser.setPage(page);
+		meUser.setUser(UserUtils.getUser());
+		page.setList(dao.findList(meUser));
+		return page.getList();
 	}
 	
 }

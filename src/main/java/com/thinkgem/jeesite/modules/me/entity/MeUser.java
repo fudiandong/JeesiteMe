@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.me.entity;
 
+import com.thinkgem.jeesite.modules.sys.entity.User;
 import org.hibernate.validator.constraints.Length;
 import com.thinkgem.jeesite.modules.sys.entity.Office;
 
@@ -16,6 +17,8 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 public class MeUser extends DataEntity<MeUser> {
 	
 	private static final long serialVersionUID = 1L;
+
+	private User user; // 用户id
 	private String name;		// name
 	private String sex;		// sex
 	private String phone;		// phone
@@ -83,5 +86,12 @@ public class MeUser extends DataEntity<MeUser> {
 	public void setOffice(Office office) {
 		this.office = office;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }
