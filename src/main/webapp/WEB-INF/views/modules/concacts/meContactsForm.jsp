@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 	<title>联系人管理</title>
@@ -49,7 +50,7 @@
 			<label class="control-label">生日：</label>
 			<div class="controls">
 				<input name="birthday" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${meContacts.birthday}" pattern="yyyy-MM-dd"/>"
+					value="${meContacts.birthday}"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 			</div>
 		</div>
